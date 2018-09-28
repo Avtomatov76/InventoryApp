@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">Inventory App</string>
 
+    <!-- Label for a "Sell Item" button [CHAR LIMIT=20] -->
+    <string name="sell_item">Sell Item</string>
+
+    <!-- Label for a "Delete Item" button [CHAR LIMIT=20] -->
+    <string name="delete_item">Delete Item</string>
+
+    <!-- Toast message showing successful quantity update [CHAR LIMIT=30] -->
+    <string name="quantity_updated">Quantity updated</string>
+
+    <!-- Toast message saying that items are out of stock [CHAR LIMIT=NONE] -->
+    <string name="no_more_items">There no more items available</string>
+
+    <!-- Error when selling an item [CHAR LIMIT=NONE] -->
+    <string name="error_selling_item">Error While Selling Item</string>
+
     <!-- Label for overflow menu option that inserts fake product data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Fake Data</string>
 
@@ -44,10 +59,10 @@
     <string name="editor_activity_title_edit_product">Edit Product</string>
 
     <!-- Toast message in editor when new product has been successfully inserted [CHAR LIMIT=NONE] -->
-    <string name="editor_insert_product_successful">Product saved</string>
+    <string name="editor_save_product_successful">Product saved</string>
 
     <!-- Toast message in editor when new product has failed to be inserted [CHAR LIMIT=NONE] -->
-    <string name="editor_insert_product_failed">Error with saving product</string>
+    <string name="editor_save_product_failed">Error with saving product</string>
 
     <!-- Toast message in editor when current product was successfully updated [CHAR LIMIT=NONE] -->
     <string name="editor_update_product_successful">Product updated</string>
@@ -78,4 +93,10 @@
 
     <!-- Toast message in editor when current product has failed to be deleted [CHAR LIMIT=NONE] -->
     <string name="editor_delete_product_failed">Error with deleting product</string>
+
+    <!-- Toast message in editor when quantity field is empty [CHAR LIMIT=NONE] -->
+    <string name="editor_quantity_empty">Quantity field is empty</string>
+
+    <!-- Toast message in editor when quantity field equal zero or less [CHAR LIMIT=NONE] -->
+    <string name="editor_quantity_zero">Quantity field is already at 0</string>
 </resources>

@@ -21,12 +21,38 @@
         android:hint="@string/hint_product_price"
         android:inputType="textCapWords" />
 
-    <EditText
-        android:id="@+id/edit_product_quantity"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_product_quantity"
-        android:inputType="textCapWords" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_product_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_product_quantity"
+            android:inputType="textCapWords"
+            android:paddingRight="65dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <Button
+                android:id="@+id/increase_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1" />
+
+            <Button
+                android:id="@+id/decrease_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-1" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/edit_product_supplier"
@@ -41,4 +67,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_product_supplier_phone"
         android:inputType="textCapWords" />
+
+    <Button
+        android:id="@+id/delete_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_item" />
 </LinearLayout>

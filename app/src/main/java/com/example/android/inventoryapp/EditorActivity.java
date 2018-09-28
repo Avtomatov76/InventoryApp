@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,22 +35,30 @@ public class EditorActivity extends AppCompatActivity implements
     // Content URI for the existing product
     private Uri mCurrentProductUri;
 
-    // EditText field to enter the product's name.
+    // EditText field to enter the product's name
     private EditText nameEditText;
 
-    // EditText field to enter the product's price.
+    // EditText field to enter the product's price
     private EditText priceEditText;
 
-    // EditText field to enter the product's quantity.
+    // EditText field to enter the product's quantity
     private EditText quantityEditText;
 
-    // EditText field to enter supplier's name.
+    // EditText field to enter supplier's name
     private EditText supplierEditText;
 
-    // EditText field to enter supplier's phone number.
+    // EditText field to enter supplier's phone number
     private EditText supplierPhoneEditText;
 
-    /** Boolean flag that keeps track of whether the product has been edited (true) or not (false) */
+    // Button to delete a product from the database
+    private Button deleteItem;
+
+    // Current quantity of an item
+    private int currentQuantity;
+
+    /**
+     * Boolean flag that keeps track of whether the product has been edited (true) or not (false)
+     */
     private boolean mProductHasChanged = false;
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
@@ -68,7 +77,7 @@ public class EditorActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        // Examine teh intent that was used to launch this activity,
+        // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new product or editing an existing one.
         Intent intent = getIntent();
         mCurrentProductUri = intent.getData();
@@ -90,20 +99,70 @@ public class EditorActivity extends AppCompatActivity implements
             getSupportLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, this);
         }
 
-        // Find all relevant views that we need to read user inout from
+        // Find all relevant views that we need to read user input from
         nameEditText = findViewById(R.id.edit_product_name);
         priceEditText = findViewById(R.id.edit_product_price);
         quantityEditText = findViewById(R.id.edit_product_quantity);
         supplierEditText = findViewById(R.id.edit_product_supplier);
         supplierPhoneEditText = findViewById(R.id.edit_product_supplier_phone);
+        deleteItem = findViewById(R.id.delete_item);
 
-        // Setup OnTouchListeners on all the input fields, so we can determine if the user
+        // Find "increase/decrease" buttons
+        Button increaseByOne = findViewById(R.id.increase_button);
+        Button decreaseByOne = findViewById(R.id.decrease_button);
+
+        // Setting OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them.
         nameEditText.setOnTouchListener(mTouchListener);
         priceEditText.setOnTouchListener(mTouchListener);
         quantityEditText.setOnTouchListener(mTouchListener);
         supplierEditText.setOnTouchListener(mTouchListener);
         supplierPhoneEditText.setOnTouchListener(mTouchListener);
+        increaseByOne.setOnTouchListener(mTouchListener);
+        decreaseByOne.setOnTouchListener(mTouchListener);
+
+        // Setting an OnClickListener to initiate the delettion of an item once clicked
+        deleteItem.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteProduct();
+            }
+        });
+
+        // Increase quantity by 1
+        increaseByOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String quantity = quantityEditText.getText().toString();
+                {
+                    currentQuantity = Integer.parseInt(quantity);
+                    quantityEditText.setText(String.valueOf(currentQuantity + 1));
+                }
+            }
+        });
+
+        // Decrease quantity by 1 and making sure quantity is not empty and
+        // does not equal to "0" before proceeding with decreasing it.
+        decreaseByOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = quantityEditText.getText().toString();
+                if (TextUtils.isEmpty(quantity)) {
+                    Toast.makeText(EditorActivity.this, R.string.editor_quantity_empty,
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    currentQuantity = Integer.parseInt(quantity);
+                    if (currentQuantity == 0) {
+                        Toast.makeText(EditorActivity.this,
+                                R.string.editor_quantity_zero, Toast.LENGTH_SHORT).show();
+                    } else {
+                        quantityEditText.setText(String.valueOf(currentQuantity - 1));
+                    }
+                }
+            }
+        });
     }
 
     private void saveProduct() {
@@ -120,22 +179,21 @@ public class EditorActivity extends AppCompatActivity implements
         // Check if this is supposed to be a new product
         // and check if all the fields in the editor are blank
         if (mCurrentProductUri == null &&
-                TextUtils.isEmpty(nameString)  && TextUtils.isEmpty(priceString) &&
+                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierString)
                 && TextUtils.isEmpty(supplierPhoneString)) {
             // Since no fields were modified, we can return without creating a new product.
             // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;}
+            return;
+        }
 
         // Create a ContentValues object where column names are the keys,
-        // and pet attributes from the editor are the values.
+        // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_PRODUCT_NAME, nameString);
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, price);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER, supplierString);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, supplierPhoneString);
-
-        //long newRowId = db.insert(ProductEntry.TABLE_NAME, null, values);
 
         // If quantity is not provided by the user, don't try to parse the string into an
         // integer value.  Use "0" by default.
@@ -149,18 +207,18 @@ public class EditorActivity extends AppCompatActivity implements
         // mCurrentProductUri is null or not
         if (mCurrentProductUri == null) {
             // This is a NEW product, so insert a new product into the provider,
-            // // returning the content URI for the new product.
+            // returning the content URI for the new product.
             Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
                 // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_product_failed),
+                Toast.makeText(this, getString(R.string.editor_save_product_failed),
                         Toast.LENGTH_SHORT).show();
             }
         } else {
             // Otherwise this is an EXISTING product, so update the product with the content URI:
-            // mCurrentPetUri and pass in the new ContentValues.
+            // mCurrentProductUri and pass in the new ContentValues.
             int rowsAffected = getContentResolver().update(mCurrentProductUri, values,
                     null, null);
 
@@ -217,9 +275,9 @@ public class EditorActivity extends AppCompatActivity implements
             case android.R.id.home:
                 // If the product hasn't changed, navigate back to parent activity (MainActivity)
                 if (!mProductHasChanged) {
-                NavUtils.navigateUpFromSameTask(EditorActivity.this);
-                return true;
-        }
+                    NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                    return true;
+                }
 
                 // Otherwise if there are unsaved changes, setup a dialog to warn the user.
                 // Create a click listener to handle the user confirming that
@@ -300,14 +358,12 @@ public class EditorActivity extends AppCompatActivity implements
             int supplierColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER);
             int supplierPhoneColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE);
 
-
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             String supplier = cursor.getString(supplierColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
-
 
             // Update the views on the screen with the values from the database
             nameEditText.setText(name);
@@ -331,9 +387,8 @@ public class EditorActivity extends AppCompatActivity implements
     /**
      * Show a dialog that warns the user there are unsaved changes that will be lost
      * if they continue leaving the editor.
-     *
      * @param discardButtonClickListener is the click listener for what to do when
-     *                                   the user confirms they want to discard their changes
+     * the user confirms they want to discard their changes
      */
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
@@ -358,7 +413,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
-     * Prompt the user to confirm that they want to delete this pet.
+     * Prompt the user to confirm that they want to delete this product.
      */
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
@@ -368,7 +423,7 @@ public class EditorActivity extends AppCompatActivity implements
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the product.
-                deletePet();
+                deleteProduct();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -384,10 +439,11 @@ public class EditorActivity extends AppCompatActivity implements
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     /**
-     * Perform the deletion of the pet in the database.
+     * Perform the deletion of the product in the database.
      */
-    private void deletePet() {
+    private void deleteProduct() {
         // Only perform the delete if this is an existing product.
         if (mCurrentProductUri != null) {
             // Call the ContentResolver to delete the product at the given content URI.

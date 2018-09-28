@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+
 import com.example.android.inventoryapp.data.ProductContract.ProductEntry;
 
 public class ProductProvider extends ContentProvider {
@@ -114,7 +115,7 @@ public class ProductProvider extends ContentProvider {
      * for that specific row in the database.
      */
     private Uri insertProduct(Uri uri, ContentValues values) {
-        // Check that the name is not null
+
         String name = values.getAsString(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME);
         if (name == null) {
             throw new IllegalArgumentException("Name of a product required");

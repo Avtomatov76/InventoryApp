@@ -20,7 +20,7 @@ import android.widget.ListView;
 
 import com.example.android.inventoryapp.data.ProductContract.ProductEntry;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int PRODUCT_LOADER = 0;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Setup a button to open ProductEditorActivity
+        // Setting up a button to open EditorActivity
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         // Find the ListView which will be populated with product data.
-        ListView productListView = (ListView) findViewById(R.id.list);
+        ListView productListView = findViewById(R.id.list);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 // by appending the "id"
                 Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
 
-                // Set the Uri on the data field of the the Intent
+                // Set the Uri on the data field of the Intent
                 intent.setData(currentProductUri);
 
                 // Launch the {@link EditorActivity} to display the data for the current product.
@@ -84,12 +84,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_PRODUCT_NAME, "MegaPhone");
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, 600);
-        values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, 1);
+        values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, 111);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER, "Ubay");
-        values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, "5557779999");
-
-        // Insert a new row for the product into the provider using the ContentResolver.
-        Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+        values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, "8007779999");
     }
 
     @Override
@@ -124,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 ProductEntry._ID,
                 ProductEntry.COLUMN_PRODUCT_NAME,
                 ProductEntry.COLUMN_PRODUCT_PRICE,
-                ProductEntry.COLUMN_PRODUCT_PRICE };
+                ProductEntry.COLUMN_PRODUCT_QUANTITY};
         // This loader will execute the ContentProvider's query method on a background thread.
         return new CursorLoader(this,
                 ProductEntry.CONTENT_URI,
