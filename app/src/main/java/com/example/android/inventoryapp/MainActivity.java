@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, 111);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER, "Ubay");
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, "8007779999");
+
+        Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
     }
 
     @Override

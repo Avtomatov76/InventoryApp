@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_margin"
     tools:context=".EditorActivity">
@@ -42,12 +42,18 @@
                 android:id="@+id/increase_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/increase_round_button"
+                android:textColor="@color/textColorWhite"
+                android:textStyle="bold"
                 android:text="+1" />
 
             <Button
                 android:id="@+id/decrease_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/decrease_round_button"
+                android:textColor="@color/textColorWhite"
+                android:textStyle="bold"
                 android:text="-1" />
 
         </LinearLayout>
@@ -72,5 +78,14 @@
         android:id="@+id/delete_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_margin"
         android:text="@string/delete_item" />
+
+    <Button
+        android:id="@+id/contact_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:layout_gravity="end"
+        android:text="@string/contact_supplier" />
 </LinearLayout>

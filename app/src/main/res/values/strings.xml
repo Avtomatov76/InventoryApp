@@ -7,6 +7,9 @@
     <!-- Label for a "Delete Item" button [CHAR LIMIT=20] -->
     <string name="delete_item">Delete Item</string>
 
+    <!-- Label for a "Contact Supplier" button [CHAR LIMIT=20] -->
+    <string name="contact_supplier">Contact Supplier</string>
+
     <!-- Toast message showing successful quantity update [CHAR LIMIT=30] -->
     <string name="quantity_updated">Quantity updated</string>
 
@@ -47,7 +50,7 @@
     <string name="action_delete">Delete</string>
 
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
-    <string name="empty_view_title_text">Oops... No items stored</string>
+    <string name="empty_view_title_text">Oops&#8230; No items stored</string>
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Please add a product</string>
@@ -99,4 +102,19 @@
 
     <!-- Toast message in editor when quantity field equal zero or less [CHAR LIMIT=NONE] -->
     <string name="editor_quantity_zero">Quantity field is already at 0</string>
+
+    <!-- Toast message asking a user to enter product name [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_name">Please enter product name</string>
+
+    <!-- Toast message asking a user to enter product price [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_price">Please enter product price</string>
+
+    <!-- Toast message asking a user to enter quantity amount [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_quantity">Please enter product quantity</string>
+
+    <!-- Toast message asking a user to enter supplier name [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_supplier">Please enter supplier name</string>
+
+    <!-- Toast message asking a user to enter supplier phone number [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_supplier_phone">Please enter supplier phone number</string>
 </resources>

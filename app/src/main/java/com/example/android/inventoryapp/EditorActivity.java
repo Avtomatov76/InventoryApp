@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.ProductContract.ProductEntry;
@@ -135,7 +136,10 @@ public class EditorActivity extends AppCompatActivity implements
             public void onClick(View v) {
 
                 String quantity = quantityEditText.getText().toString();
-                {
+                if (quantity == null || TextUtils.isEmpty(quantity)) {
+                    Toast.makeText(EditorActivity.this, R.string.editor_enter_quantity,
+                            Toast.LENGTH_SHORT).show();
+                } else {
                     currentQuantity = Integer.parseInt(quantity);
                     quantityEditText.setText(String.valueOf(currentQuantity + 1));
                 }
@@ -163,6 +167,21 @@ public class EditorActivity extends AppCompatActivity implements
                 }
             }
         });
+
+        // Setting up a "Contact Supplier" button that starts send the Intent to a phone app
+        final Button contactSupplierButton = findViewById(R.id.contact_supplier);
+
+        contactSupplierButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = supplierPhoneEditText.getText().toString().trim();
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("Tel:" + phoneNumber));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void saveProduct() {
@@ -174,7 +193,9 @@ public class EditorActivity extends AppCompatActivity implements
         String quantityString = quantityEditText.getText().toString().trim();
         String supplierString = supplierEditText.getText().toString().trim();
         String supplierPhoneString = supplierPhoneEditText.getText().toString().trim();
-        int price = Integer.parseInt(priceString);
+
+        //int price = Integer.parseInt(priceString);
+
 
         // Check if this is supposed to be a new product
         // and check if all the fields in the editor are blank
@@ -182,8 +203,34 @@ public class EditorActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierString)
                 && TextUtils.isEmpty(supplierPhoneString)) {
+            Toast.makeText(this, ("Please enter product info"), Toast.LENGTH_LONG).show();
             // Since no fields were modified, we can return without creating a new product.
             // No need to create ContentValues and no need to do any ContentProvider operations.
+            return;
+        }
+
+        if (TextUtils.isEmpty(nameString)) {
+            nameEditText.setError(getString(R.string.editor_enter_name));
+            return;
+        }
+
+        if (TextUtils.isEmpty(priceString)) {
+            priceEditText.setError(getString(R.string.editor_enter_price));
+            return;
+        }
+
+        if (TextUtils.isEmpty(quantityString)) {
+            quantityEditText.setError(getString(R.string.editor_enter_quantity));
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierString)) {
+            supplierEditText.setError(getString(R.string.editor_enter_supplier));
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierPhoneString)) {
+            supplierPhoneEditText.setError(getString(R.string.editor_enter_supplier_phone));
             return;
         }
 
@@ -191,7 +238,7 @@ public class EditorActivity extends AppCompatActivity implements
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_PRODUCT_NAME, nameString);
-        values.put(ProductEntry.COLUMN_PRODUCT_PRICE, price);
+        values.put(ProductEntry.COLUMN_PRODUCT_PRICE, priceString);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER, supplierString);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, supplierPhoneString);
 
@@ -216,6 +263,8 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_save_product_failed),
                         Toast.LENGTH_SHORT).show();
             }
+            finish();
+
         } else {
             // Otherwise this is an EXISTING product, so update the product with the content URI:
             // mCurrentProductUri and pass in the new ContentValues.
@@ -232,6 +281,7 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_update_product_successful),
                         Toast.LENGTH_SHORT).show();
             }
+            finish();
         }
     }
 
@@ -387,8 +437,9 @@ public class EditorActivity extends AppCompatActivity implements
     /**
      * Show a dialog that warns the user there are unsaved changes that will be lost
      * if they continue leaving the editor.
+     *
      * @param discardButtonClickListener is the click listener for what to do when
-     * the user confirms they want to discard their changes
+     *                                   the user confirms they want to discard their changes
      */
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
