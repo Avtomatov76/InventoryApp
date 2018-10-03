@@ -7,4 +7,6 @@
     <color name="increaseButtonColor">#008C7E</color>
     <color name="decreaseButtonColor">#E91E63</color>
     <color name="textColorWhite">#FFFFFF</color>
+    <color name="textColorBlack">#000000</color>
+    <color name="subtitleColor">#A2AAB0</color>
 </resources>

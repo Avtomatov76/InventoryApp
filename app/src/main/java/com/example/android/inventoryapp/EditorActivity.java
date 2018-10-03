@@ -176,7 +176,7 @@ public class EditorActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 String phoneNumber = supplierPhoneEditText.getText().toString().trim();
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("Tel:" + phoneNumber));
+                intent.setData(Uri.parse("tel:" + phoneNumber));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -193,9 +193,6 @@ public class EditorActivity extends AppCompatActivity implements
         String quantityString = quantityEditText.getText().toString().trim();
         String supplierString = supplierEditText.getText().toString().trim();
         String supplierPhoneString = supplierPhoneEditText.getText().toString().trim();
-
-        //int price = Integer.parseInt(priceString);
-
 
         // Check if this is supposed to be a new product
         // and check if all the fields in the editor are blank

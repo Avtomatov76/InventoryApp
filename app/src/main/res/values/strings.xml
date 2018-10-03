@@ -10,6 +10,21 @@
     <!-- Label for a "Contact Supplier" button [CHAR LIMIT=20] -->
     <string name="contact_supplier">Contact Supplier</string>
 
+    <!-- Items in stock [CHAR LIMIT=20] -->
+    <string name="items_in_stock">In Stock: </string>
+
+    <!-- Item's price [CHAR LIMIT=20] -->
+    <string name="items_price">Item Price: $</string>
+
+    <!-- Increase button "+1" [CHAR LIMIT=20] -->
+    <string name="increase_button">+1</string>
+
+    <!-- Decrease button "-1"[CHAR LIMIT=20] -->
+    <string name="decrease_button">-1</string>
+
+    <!-- "Add Item" button [CHAR LIMIT=20] -->
+    <string name="add_item_button">Add Item</string>
+
     <!-- Toast message showing successful quantity update [CHAR LIMIT=30] -->
     <string name="quantity_updated">Quantity updated</string>
 
@@ -38,7 +53,7 @@
     <string name="hint_product_supplier">Supplier</string>
 
     <!-- Text hint for quantity field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_product_supplier_phone">Supplier Phone Number</string>
+    <string name="hint_product_supplier_phone">Supplier Phone #</string>
 
     <!-- Text in the Manifest "Add a product" [CHAR LIMIT=30] -->
     <string name="add_a_product">Add a Product</string>

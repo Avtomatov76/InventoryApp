@@ -13,4 +13,131 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- List Item's xml Product Name styling -->
+    <style name="productName">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingRight">@dimen/activity_margin</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">#2B3D4D</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- List Item's xml Product Quantity styling -->
+    <style name="productQuantityPrice">
+        <item name="android:padding">2dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    </style>
+
+    <!-- List Item's xml "Sell Item" Button styling -->
+    <style name="sellItemButton">
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/delete_item_button_shape</item>
+        <item name="android:focusable">false</item>
+        <item name="android:text">@string/sell_item</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+    </style>
+
+    <!-- Activity Editor xml Product Name hint styling -->
+    <style name="productNameHint">
+        <item name="android:hint">@string/hint_product_name</item>
+        <item name="android:inputType">textCapWords</item>
+    </style>
+
+    <!-- Activity Editor xml Product Price hint styling -->
+    <style name="productPriceHint">
+        <item name="android:hint">@string/hint_product_price</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:layout_marginLeft">26dp</item>
+        <item name="android:layout_marginTop">@dimen/activity_margin</item>
+    </style>
+
+    <!-- Activity Editor xml Product Quantity hint styling -->
+    <style name="productQuantityHint">
+        <item name="android:hint">@string/hint_product_quantity</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:layout_marginLeft">26dp</item>
+    </style>
+
+    <!-- Activity Editor xml Product increase button hint styling -->
+    <style name="productIncreaseButton">
+        <item name="android:background">@drawable/increase_round_button</item>
+        <item name="android:text">@string/increase_button</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Activity Editor xml Product decrease button hint styling -->
+    <style name="productDecreaseButton">
+        <item name="android:background">@drawable/decrease_round_button</item>
+        <item name="android:text">@string/decrease_button</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Activity Editor xml Product supplier hint styling -->
+    <style name="productSupplier">
+        <item name="android:layout_marginTop">@dimen/activity_margin</item>
+        <item name="android:hint">@string/hint_product_supplier</item>
+        <item name="android:inputType">textCapWords</item>
+    </style>
+
+    <!-- Activity Editor xml Product supplier phone hint styling -->
+    <style name="productSupplierPhone">
+        <item name="android:layout_marginTop">@dimen/activity_margin</item>
+        <item name="android:layout_marginRight">22dp</item>
+        <item name="android:hint">@string/hint_product_supplier_phone</item>
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <!-- Activity Editor xml "Contact Supplier" Button styling -->
+    <style name="contactSupplierButton">
+        <item name="android:layout_marginTop">@dimen/activity_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin</item>
+        <item name="android:background">@drawable/contact_supplier_button_shape</item>
+        <item name="android:text">@string/contact_supplier</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Activity Editor xml "Delete Item" Button styling -->
+    <style name="deleteItemButton">
+        <item name="android:layout_marginTop">46dp</item>
+        <item name="android:background">@drawable/delete_item_button_shape</item>
+        <item name="android:text">@string/delete_item</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Main Activity xml empty TextView styling -->
+    <style name="emptyTextView">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/empty_view_title_text</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Main Activity xml empty TextView subtitle styling -->
+    <style name="emptyTextViewSubtitle">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_below">@id/empty_title_text</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:text">@string/empty_view_subtitle_text</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">@color/subtitleColor</item>
+    </style>
+
+    <!-- Main Activity xml "Add Item" button styling -->
+    <style name="addItemButton">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">36dp</item>
+        <item name="android:text">@string/add_item_button</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:background">@drawable/add_item_button_shape</item>
+        <item name="android:alpha">.75</item>
+    </style>
+
 </resources>

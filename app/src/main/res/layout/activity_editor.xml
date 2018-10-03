@@ -9,17 +9,15 @@
 
     <EditText
         android:id="@+id/edit_product_name"
+        style="@style/productNameHint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_product_name"
-        android:inputType="textCapWords" />
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/edit_product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_product_price"
-        android:inputType="textCapWords" />
+        style="@style/productPriceHint"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,11 +25,9 @@
 
         <EditText
             android:id="@+id/edit_product_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_product_quantity"
-            android:inputType="textCapWords"
-            android:paddingRight="65dp" />
+            style="@style/productQuantityHint"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -40,21 +36,15 @@
 
             <Button
                 android:id="@+id/increase_button"
+                style="@style/productIncreaseButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/increase_round_button"
-                android:textColor="@color/textColorWhite"
-                android:textStyle="bold"
-                android:text="+1" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/decrease_button"
+                style="@style/productDecreaseButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/decrease_round_button"
-                android:textColor="@color/textColorWhite"
-                android:textStyle="bold"
-                android:text="-1" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -62,30 +52,33 @@
 
     <EditText
         android:id="@+id/edit_product_supplier"
+        style="@style/productSupplier"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_product_supplier"
-        android:inputType="textCapWords" />
+        android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/edit_product_supplier_phone"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_product_supplier_phone"
-        android:inputType="textCapWords" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_product_supplier_phone"
+            style="@style/productSupplierPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/contact_supplier"
+            style="@style/contactSupplierButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/delete_item"
+        style="@style/deleteItemButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:text="@string/delete_item" />
-
-    <Button
-        android:id="@+id/contact_supplier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:layout_gravity="end"
-        android:text="@string/contact_supplier" />
+        android:layout_height="wrap_content" />
 </LinearLayout>

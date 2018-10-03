@@ -8,6 +8,5 @@
 
     <solid android:color="@color/decreaseButtonColor" />
 
-    <stroke
-        android:color="@color/decreaseButtonColor" />
+    <stroke android:color="@color/decreaseButtonColor" />
 </shape>
