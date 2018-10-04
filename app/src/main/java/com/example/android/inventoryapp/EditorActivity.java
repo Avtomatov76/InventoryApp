@@ -208,39 +208,6 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
-        if (TextUtils.isEmpty(nameString)) {
-            Toast.makeText(this, getString(R.string.editor_enter_name),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(priceString)) {
-            int price = Integer.parseInt(priceString);
-            if (price <= 0) {
-                Toast.makeText(this, getString(R.string.editor_enter_correct_price),
-                        Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                Toast.makeText(this, getString(R.string.editor_enter_price),
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        if (TextUtils.isEmpty(quantityString)) {
-            quantityEditText.setError(getString(R.string.editor_enter_quantity));
-            return;
-        }
-
-        if (TextUtils.isEmpty(supplierString)) {
-            supplierEditText.setError(getString(R.string.editor_enter_supplier));
-            return;
-        }
-
-        if (TextUtils.isEmpty(supplierPhoneString)) {
-            supplierPhoneEditText.setError(getString(R.string.editor_enter_supplier_phone));
-            return;
-        }
-
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
@@ -290,7 +257,6 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_update_product_successful),
                         Toast.LENGTH_SHORT).show();
             }
-            //finish();
         }
     }
 
@@ -322,10 +288,39 @@ public class EditorActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                saveProduct();
-                //finish();
-                return true;
-            // Respond to a click on the "Delete" menu option
+
+                String nameString = nameEditText.getText().toString().trim();
+                String priceString = priceEditText.getText().toString().trim();
+                String quantityString = quantityEditText.getText().toString().trim();
+                String supplierString = supplierEditText.getText().toString().trim();
+                String supplierPhoneString = supplierPhoneEditText.getText().toString().trim();
+
+                if (TextUtils.isEmpty(nameString)) {
+                    Toast.makeText(this, getString(R.string.editor_enter_name),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                } else if (TextUtils.isEmpty(priceString)) {
+                    Toast.makeText(this, getString(R.string.editor_enter_price),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                } else if (TextUtils.isEmpty(quantityString)) {
+                    Toast.makeText(this, getString(R.string.editor_enter_quantity),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                } else if (TextUtils.isEmpty(supplierString)) {
+                    Toast.makeText(this, getString(R.string.editor_enter_supplier),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                } else if (TextUtils.isEmpty(supplierPhoneString)) {
+                    Toast.makeText(this, getString(R.string.editor_enter_supplier_phone),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    saveProduct();
+                    finish();
+                    return true;
+                }
+                // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
                 // Pop up confirmation dialog for deletion
                 showDeleteConfirmationDialog();
