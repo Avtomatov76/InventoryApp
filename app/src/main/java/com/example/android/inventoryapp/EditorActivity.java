@@ -61,6 +61,7 @@ public class EditorActivity extends AppCompatActivity implements
      * Boolean flag that keeps track of whether the product has been edited (true) or not (false)
      */
     private boolean mProductHasChanged = false;
+
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mProductHasChanged boolean to true.
@@ -200,20 +201,29 @@ public class EditorActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierString)
                 && TextUtils.isEmpty(supplierPhoneString)) {
-            Toast.makeText(this, ("Please enter product info"), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, (getString(R.string.editor_enter_product_info)),
+                    Toast.LENGTH_SHORT).show();
             // Since no fields were modified, we can return without creating a new product.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
 
         if (TextUtils.isEmpty(nameString)) {
-            nameEditText.setError(getString(R.string.editor_enter_name));
+            Toast.makeText(this, getString(R.string.editor_enter_name),
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(priceString)) {
-            priceEditText.setError(getString(R.string.editor_enter_price));
-            return;
+            int price = Integer.parseInt(priceString);
+            if (price <= 0) {
+                Toast.makeText(this, getString(R.string.editor_enter_correct_price),
+                        Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                Toast.makeText(this, getString(R.string.editor_enter_price),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (TextUtils.isEmpty(quantityString)) {
@@ -234,6 +244,7 @@ public class EditorActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
+
         values.put(ProductEntry.COLUMN_PRODUCT_NAME, nameString);
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, priceString);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER, supplierString);
@@ -259,9 +270,10 @@ public class EditorActivity extends AppCompatActivity implements
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_save_product_failed),
                         Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, getString(R.string.editor_save_product_successful),
+                        Toast.LENGTH_SHORT).show();
             }
-            finish();
-
         } else {
             // Otherwise this is an EXISTING product, so update the product with the content URI:
             // mCurrentProductUri and pass in the new ContentValues.
@@ -278,7 +290,7 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_update_product_successful),
                         Toast.LENGTH_SHORT).show();
             }
-            finish();
+            //finish();
         }
     }
 
@@ -311,7 +323,7 @@ public class EditorActivity extends AppCompatActivity implements
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 saveProduct();
-                finish();
+                //finish();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:

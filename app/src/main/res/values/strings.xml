@@ -118,11 +118,22 @@
     <!-- Toast message in editor when quantity field equal zero or less [CHAR LIMIT=NONE] -->
     <string name="editor_quantity_zero">Quantity field is already at 0</string>
 
+    <!-- Toast message asking a user to enter product info [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_product_info">Please enter product info</string>
+
     <!-- Toast message asking a user to enter product name [CHAR LIMIT=NONE] -->
     <string name="editor_enter_name">Please enter product name</string>
 
     <!-- Toast message asking a user to enter product price [CHAR LIMIT=NONE] -->
     <string name="editor_enter_price">Please enter product price</string>
+
+    <!-- Toast message asking a user to enter product price between 0 and 99999 [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_correct_price">Please enter product price between "0" and
+        "99999"</string>
+
+    <!-- Toast message asking a user to enter quantity that is not < 0 [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_correct_quantity">Please enter product quantity that is not
+        less than zero</string>
 
     <!-- Toast message asking a user to enter quantity amount [CHAR LIMIT=NONE] -->
     <string name="editor_enter_quantity">Please enter product quantity</string>

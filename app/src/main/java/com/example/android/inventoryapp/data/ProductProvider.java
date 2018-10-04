@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.ProductContract.ProductEntry;
 
@@ -122,7 +123,7 @@ public class ProductProvider extends ContentProvider {
         }
 
         Integer price = values.getAsInteger(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE);
-        if (price == null) {
+        if (price != null && price < 0) {
             throw new IllegalArgumentException("Price of a product required");
         }
 
@@ -197,8 +198,8 @@ public class ProductProvider extends ContentProvider {
         // Check that the price value is valid.
         if (values.containsKey(ProductEntry.COLUMN_PRODUCT_PRICE)) {
             Integer price = values.getAsInteger(ProductEntry.COLUMN_PRODUCT_PRICE);
-            if (price == null) {
-                throw new IllegalArgumentException("Price of a product required");
+            if (price == null || price <= 0) {
+                throw new IllegalArgumentException("Price of a product should be greater than 0");
             }
         }
 

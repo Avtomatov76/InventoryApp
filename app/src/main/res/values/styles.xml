@@ -52,6 +52,7 @@
         <item name="android:inputType">textCapWords</item>
         <item name="android:layout_marginLeft">26dp</item>
         <item name="android:layout_marginTop">@dimen/activity_margin</item>
+        <item name="android:maxLength">5</item>
     </style>
 
     <!-- Activity Editor xml Product Quantity hint styling -->
@@ -59,6 +60,7 @@
         <item name="android:hint">@string/hint_product_quantity</item>
         <item name="android:inputType">textCapWords</item>
         <item name="android:layout_marginLeft">26dp</item>
+        <item name="android:maxLength">5</item>
     </style>
 
     <!-- Activity Editor xml Product increase button hint styling -->
@@ -90,6 +92,7 @@
         <item name="android:layout_marginRight">22dp</item>
         <item name="android:hint">@string/hint_product_supplier_phone</item>
         <item name="android:inputType">phone</item>
+        <item name="android:maxLength">10</item>
     </style>
 
     <!-- Activity Editor xml "Contact Supplier" Button styling -->
