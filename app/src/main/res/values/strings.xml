@@ -127,13 +127,19 @@
     <!-- Toast message asking a user to enter product price [CHAR LIMIT=NONE] -->
     <string name="editor_enter_price">Please enter product price</string>
 
-    <!-- Toast message asking a user to enter product price between 0 and 99999 [CHAR LIMIT=NONE] -->
-    <string name="editor_enter_correct_price">Please enter product price between "0" and
-        "99999"</string>
+    <!-- Toast message asking a user to enter price that is equal to or higher than "0" [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_correct_price">Please enter price that is equal to or
+        higher than a "0"</string>
+
+    <!-- Toast message asking a user to enter price that is an Integer value [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_integer_price">Please enter price that is an Integer</string>
 
     <!-- Toast message asking a user to enter quantity that is not < 0 [CHAR LIMIT=NONE] -->
-    <string name="editor_enter_correct_quantity">Please enter product quantity that is not
-        less than zero</string>
+    <string name="editor_enter_correct_quantity">Please enter product quantity that is equal to or
+        higher than a "0"</string>
+
+    <!-- Toast message asking a user to enter quantity that is an Integer value [CHAR LIMIT=NONE] -->
+    <string name="editor_enter_integer_quantity">Please enter quantity that is an Integer</string>
 
     <!-- Toast message asking a user to enter quantity amount [CHAR LIMIT=NONE] -->
     <string name="editor_enter_quantity">Please enter product quantity</string>

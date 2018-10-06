@@ -195,19 +195,6 @@ public class EditorActivity extends AppCompatActivity implements
         String supplierString = supplierEditText.getText().toString().trim();
         String supplierPhoneString = supplierPhoneEditText.getText().toString().trim();
 
-        // Check if this is supposed to be a new product
-        // and check if all the fields in the editor are blank
-        if (mCurrentProductUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
-                TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierString)
-                && TextUtils.isEmpty(supplierPhoneString)) {
-            Toast.makeText(this, (getString(R.string.editor_enter_product_info)),
-                    Toast.LENGTH_SHORT).show();
-            // Since no fields were modified, we can return without creating a new product.
-            // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;
-        }
-
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
@@ -288,13 +275,55 @@ public class EditorActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-
+                // Taking data that was entered by a user and performing valuation to make sure
+                // correct data is entered
                 String nameString = nameEditText.getText().toString().trim();
                 String priceString = priceEditText.getText().toString().trim();
                 String quantityString = quantityEditText.getText().toString().trim();
                 String supplierString = supplierEditText.getText().toString().trim();
                 String supplierPhoneString = supplierPhoneEditText.getText().toString().trim();
 
+                // Check if all the fields in the editor are blank
+                if (mCurrentProductUri == null &&
+                        TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
+                        TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierString)
+                        && TextUtils.isEmpty(supplierPhoneString)) {
+                    Toast.makeText(this, (getString(R.string.editor_enter_product_info)),
+                            Toast.LENGTH_SHORT).show();
+                    // Since no fields were modified, we can return without creating a new product.
+                    // No need to create ContentValues and no need to do any ContentProvider operations.
+                    break;
+                }
+
+                // Making sure price entered is a positive Integer value
+                try {
+                    int price = Integer.parseInt(priceString);
+                    if (price < 0) {
+                        Toast.makeText(this, getString(R.string.editor_enter_correct_price),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                } catch (NumberFormatException nfe) {
+                    Toast.makeText(this, getString(R.string.editor_enter_integer_price),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+                // Making sure quantity entered is a positive Integer value
+                try {
+                    int quantity = Integer.parseInt(quantityString);
+                    if (quantity < 0) {
+                        Toast.makeText(this, getString(R.string.editor_enter_correct_quantity),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                } catch (NumberFormatException nfe) {
+                    Toast.makeText(this, getString(R.string.editor_enter_integer_quantity),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+                // Making sure EditText fields are not null
                 if (TextUtils.isEmpty(nameString)) {
                     Toast.makeText(this, getString(R.string.editor_enter_name),
                             Toast.LENGTH_SHORT).show();
